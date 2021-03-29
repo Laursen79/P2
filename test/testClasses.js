@@ -40,7 +40,11 @@ export class TestSuite{
                 const input  = inputs[i];
                 const output = outputs[i];
 
-                const result = func(...input);
+                let result;
+                if (typeof input === 'string')
+                    result = func(input);
+                else
+                    result = func(...input);
 
                 try{
                     if (typeof result === 'object'){
