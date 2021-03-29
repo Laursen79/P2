@@ -3,7 +3,6 @@ import * as socket_io from "socket.io";
 import {ConnectionTable} from "./connection.js";
 import {ColorPicker} from "../public/js/ColorPicker.js";
 
-
 // AkvarioServer controls all real time connection with users all users.
 export class AkvarioServer{
     io;
@@ -85,4 +84,8 @@ export class AkvarioServer{
         this.userProperties.remove(id);
     }
 }
+
+
+
+
 

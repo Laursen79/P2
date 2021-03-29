@@ -6,18 +6,24 @@ import {AkvarioServer} from "./scripts/AkvarioServer.js";
 
 const server = express();
 const HTTPServer = createServer(server);
-
 const port = process.env.PORT || 3000;
 
-const akvarioServer = new AkvarioServer(HTTPServer);
+startServer();
 
-const router = configureRouter(express.Router());
+export function startServer(akvarioServer){
 
-server.use(bodyParser.json())
-server.use(express.static('public'));
-server.use('/', router);
+    if (!akvarioServer)
+        new AkvarioServer(HTTPServer);
+
+    const router = configureRouter(express.Router());
+
+    server.use(bodyParser.json())
+    server.use(express.static('public'));
+    server.use('/', router);
+
+}
 
 //listens to PORT set on top.
 HTTPServer.listen(port, () => {
-    console.log(`Welcome to Akvario @ *:${port}`);
+    console.log(`Server started @ *:${port}`);
 });
