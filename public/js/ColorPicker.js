@@ -2,6 +2,14 @@ import colors from "../resources/colorPalette.js"
 export class ColorPicker {
     //Creates a color palette based on the colorPalette file
     colorPalette = colors;
+    counters = {};
+    constructor() {
+        /*Object.defineProperties(this.counters, Object.keys(this.colorPalette));
+        Object.assign(this.counters, 0);*/
+        Object.keys(this.colorPalette).forEach(color => {
+            this.counters[color] = 0;
+        });
+    }
 
     get colorsForLoginScreen() {
         //Creates an array of the different colors the user can chose between
@@ -14,21 +22,23 @@ export class ColorPicker {
     }
 
     previewShade(color) {
+        color = color.toLowerCase();
         //returns the hsl color of the input color
         //e.g. "red" => "hsl(0, 100%, 74%)"
-        return (this.colorPalette[color])[0];
+        if (this.colorPalette.hasOwnProperty(color))
+            return (this.colorPalette[color])[0];
+        else return undefined;
     }
 
-    counters = {
-        //Counters for each color to keep track of which shades has been given
-        red: 0, orange: 0, yellow: 0, green: 0,
-        cyan: 0, blue: 0, purple: 0, pink: 0
-    };
+
 
     getShade(color) {
+        color = color.toLowerCase();
         //Returns the next shade of the chosen color
-        const count = this.counters[color]++;
-        this.counters[color] %= this.colorPalette[color].length;
-        return (this.colorPalette[color])[count];
+        if (this.colorPalette.hasOwnProperty(color)){
+            const count = this.counters[color]++;
+            this.counters[color] %= this.colorPalette[color].length;
+            return (this.colorPalette[color])[count];}
+        else return undefined
     }
 }

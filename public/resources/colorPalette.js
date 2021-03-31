@@ -1,5 +1,5 @@
 export default
-{
+{//design requirement: LOWERCASE or else the code breaks ;)
   "red":
    ["hsl(0, 100%, 74%)",
     "hsl(0, 100%, 68%)",
