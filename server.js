@@ -21,6 +21,7 @@ export function startServer(akvarioServer){
     server.use(express.static('public'));
     server.use('/', router);
 
+    return HTTPServer;
 }
 
 //listens to PORT set on top.

@@ -77,9 +77,10 @@ export class TestSuite{
     }
 
     showResults() {
+        const tests = this.tests.length;
         const fails = this.fails.length;
         const warnings = this.warnings.length;
-        const status = `Test of ${this.suiteName} completed with ${fails} error${fails===1? '' : 's'} and ${warnings} warning${warnings===1? '' : 's'}${fails + warnings? '!' : '.'}`
+        const status = `Completed ${tests} test${tests===1? '' : 's'} in ${this.suiteName} with ${fails} error${fails===1? '' : 's'} and ${warnings} warning${warnings===1? '' : 's'}${fails + warnings? '!' : '.'}`
 
         console.log(status);
 
