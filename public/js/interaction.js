@@ -1,9 +1,13 @@
+import {peers} from './voice.js';
 
 export function moveUser(id, position){
-    const user = document.getElementById(id);
+    const containerElement = document.getElementById(id);
 
-    user.style.top  = position.top + "px";
-    user.style.left = position.left + "px";
+    const userMoved = new CustomEvent('moved', {detail: position});
+    containerElement.dispatchEvent(userMoved);
+
+    containerElement.style.top  = position.top + "px";
+    containerElement.style.left = position.left + "px";
 }
 
 export function turnUser(id, rotation){
@@ -14,7 +18,13 @@ export function turnUser(id, rotation){
 export function removeDeadUser(id){
     const userElement = document.getElementById(id);
     if (userElement !== null)
-        userElement.remove();
+        userElement.remove()
+    
+    //Close peer connection
+    if (peers[id]) {
+        peers[id].close();
+        delete peers[id];
+    }
 }
 
 
